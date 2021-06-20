@@ -1,1 +1,31 @@
-<h1>book_show</h1>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+
+      <%= render 'users/info', user: @book.user %>
+
+      <div class="row">
+       <a class="btn btn-outline-secondary btn-block fas fa-user-cog edit_user_246" href="/users/246/edit"></a>
+      </div>
+     <%= render 'books/form', book: @book_new %>
+    </div>
+    <!-- books部分 -->
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table table-hover table-inverse">
+       <tbody>
+            <tr>
+             <td>
+               <%= attachment_image_tag @book.user, :profile_image, :fill, 100, 100, fallback: 'no_image.jpg' %><br>
+               <%= @book.user.name %>
+             </td>
+             <td><%= link_to @book.title, book_path(@book.id) %></td>
+             <td><%= @book.body %></td>
+             <td><%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-sm btn-success"%></td>
+             <td><%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger"%></td>
+            </tr>
+       </tbody>
+     </table>
+    </div>
+  </div>
+</div>
