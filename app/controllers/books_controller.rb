@@ -1,6 +1,8 @@
 class BooksController < ApplicationController
      def index
        @book = Book.new
+       @books = Book.all
+       @user = current_user
      end
 
      def show
@@ -8,11 +10,12 @@ class BooksController < ApplicationController
 
      def create
       # １. データを新規登録するためのインスタンス作成
-      book = Book.new(book_params)
+      @book = Book.new(book_params)
+      @book.user_id = current_user.id
       # ２. データをデータベースに保存するためのsaveメソッド実行
-      book.save
+      @book.save
       # ３.showページに飛ぶ
-      redirect_to book_path(book.id)
+      redirect_to book_path(@book)
      end
 
 
@@ -27,6 +30,6 @@ class BooksController < ApplicationController
 
      private
      def book_params
-          params.require(:book).permit(:title, :opinion)
+          params.require(:book).permit(:title, :body)
      end
 end
