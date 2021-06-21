@@ -18,6 +18,7 @@ class BooksController < ApplicationController
       @book.user_id = current_user.id
       # ２. データをデータベースに保存するためのsaveメソッド実行
       @book.save
+      flash[:notice] = "You have create book succesfully."
       # ３.showページに飛ぶ
       redirect_to book_path(@book)
      end
@@ -30,6 +31,7 @@ class BooksController < ApplicationController
      def update
          @book = Book.find(params[:id])
          @book.update(book_params)
+         flash[:notice] = "You have updated book succesfully."
          redirect_to book_path(@book)
      end
 
