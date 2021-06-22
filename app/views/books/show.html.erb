@@ -3,7 +3,7 @@
     <div class="col-md-3">
       <%= render 'users/info', user: @book.user %>
       <div class="row">
-       <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+       <%= link_to edit_user_path(current_user.id), class: "btn btn-outline-secondary btn-block" do %>
        <i class="fas fa-user-cog"></i>
        <% end %>
       </div>
@@ -21,8 +21,10 @@
              </td>
              <td><%= link_to @book.title, book_path(@book.id) %></td>
              <td><%= @book.body %></td>
-             <td><%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-sm btn-success"%></td>
-             <td><%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger"%></td>
+             <% if @user.id == current_user.id %>
+               <td><%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-sm btn-success"%></td>
+               <td><%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger"%></td>
+             <% end %>
             </tr>
        </tbody>
      </table>
