@@ -20,7 +20,7 @@ class BooksController < ApplicationController
       @book.user_id = current_user.id
       # ２. データをデータベースに保存するためのsaveメソッド実行
       if @book.save
-         flash[:notice] = "You have create book succesfully."
+         flash[:notice] = "You have create book successfully."
          # ３.showページに飛ぶ
          redirect_to book_path(@book)
       else
@@ -41,7 +41,7 @@ class BooksController < ApplicationController
      def update
          @book = Book.find(params[:id])
          if @book.update(book_params)
-             flash[:notice] = "You have updated book succesfully."
+             flash[:notice] = "You have updated book successfully."
              redirect_to book_path(@book)
          else
              render :edit
