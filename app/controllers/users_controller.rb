@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+
+   before_action :authenticate_user!
+   before_action :set_user, only: %I[show edit update destroy followeds followers]
+
    def index
       @user = current_user
       @book = Book.new
@@ -30,8 +34,21 @@ class UsersController < ApplicationController
     end
    end
 
+   def followeds
+     @followeds = @user.followed_users
+   end
+
+   def followers
+     @followers = @user.follower_users
+   end
+
+
  private
      def user_params
           params.require(:user).permit(:name, :introduction, :profile_image)
+     end
+
+     def set_user
+         @user = User.find(params[:id])
      end
 end

@@ -11,5 +11,21 @@
            <th>introduction</th>
            <th><%= user.introduction %></th>
          </tr>
+
+　　　  <tr>
+　　　      <th>follows</th>
+　　　      <th><%= link_to "#{user.followers.count} #{User.human_attribute_name("followeds")}", followeds_user_path(user) %></th>
+　　　  </tr>
+       <tr>
+           <th>followers</th>
+           <th><%= link_to "#{user.followeds.count} #{User.human_attribute_name("followers")}", followers_user_path(user) %></th>
+       </tr>
+
+
+
+
+
         </tbody>
       </table>
+
+
