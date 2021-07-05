@@ -4,20 +4,22 @@
       <%= render 'users/info', user: @user %>
 
       <div class="row">
+       <% if @user.id == current_user.id %>
          <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
              <i class="fas fa-user-cog"></i>
          <% end %>
+       <% end %>
       </div>
 
-      <p>
+      <div>
         <% unless @user == current_user %>
            <% if current_user.following?(@user) %>
-             <%= link_to "フォロを外す", relationship_path(id: @user.id), method: :delete, class: "btn btn-primary" %>
+             <%= link_to "フォロ-外す", relationship_path(id: @user.id), method: :delete, class: "btn btn-info" %>
            <% else %>
-             <%= link_to "フォロをする", relationships_path(follow_id: @user.id), method: :post, class: "btn btn-secondary" %>
+             <%= link_to "フォロ-する", relationships_path(follow_id: @user.id), method: :post, class: "btn btn-success" %>
            <% end %>
         <% end %>
-      </p>
+      </div>
 
       <%= render 'books/form', book: @book_new %>
     </div>

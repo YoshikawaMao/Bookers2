@@ -1,12 +1,7 @@
-<p>
-<% unless @user == current_user %>
-  <% if current_user.following?(@user) %>
-    <%= button_to t('button.unfollow'), relationship_path, method: :delete %>
-  <% else %>
-      <%= form_for(@user.followers.build) do |f| %>
-        <%= hidden_field_tag :follow_id, @user.id %>
-        <%= f.submit t('button.follow') %>
-      <% end %>
-    <% end %>
+<% unless user == current_user %>
+   <% if current_user.following?(user) %>
+     <%= link_to "フォロ-外す", relationship_path(id: user.id), method: :delete %>
+   <% else %>
+     <%= link_to "フォロ-する", relationships_path(follow_id: user.id), method: :post %>
+   <% end %>
 <% end %>
-</p>
