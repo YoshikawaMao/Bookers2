@@ -26,6 +26,9 @@
                              <li><%= link_to "logout", destroy_user_session_path, method: :delete, class: "fas fa-sign-out-alt nav-link text-light" %></li>
                          </ul>
                      </div>
+
+
+
                  <% else %>
                      <div class="collapse navbar-collapse" id="navbarNavDropdown">
                          <ul class="navbar-nav ml-auto">
@@ -40,8 +43,18 @@
            </nav>
      </header>
      <main>
-       <%= flash[:notice] %>
-       <%= yield %>
+         <div class="search">
+             <% if user_signed_in? %>
+                 <%= form_with url:search_path, method: :get, local: true do |f| %>
+                     <%= f.text_field 'search[value]' %>
+                     <%= f.select 'search[model]', options_for_select({ "User" => "user", "Book" => "book" }) %>
+                     <%= f.select 'search[how]', options_for_select({ "完全一致" => "match", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partical"  }) %>
+                     <%= f.submit :"検索" %>
+                 <% end %>
+             <% end %>
+         </div>
+         <%= flash[:notice] %>
+         <%= yield %>
      </main>
 </body>
 
