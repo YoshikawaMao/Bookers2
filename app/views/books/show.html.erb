@@ -3,20 +3,20 @@
          <div class="col-md-3">
              <%= render 'users/info', user: @book.user %>
              <div class="row">
-               <% if @user.id == current_user.id %>
-                 <%= link_to edit_user_path(@book.user.id), class: "btn btn-outline-secondary btn-block" do %>
-                     <i class="fas fa-user-cog"></i>
+                 <% if @user.id == current_user.id %>
+                     <%= link_to edit_user_path(@book.user.id), class: "btn btn-outline-secondary btn-block" do %>
+                         <i class="fas fa-user-cog"></i>
+                     <% end %>
                  <% end %>
-               <% end %>
              </div>
              <div>
-               <% unless @user == current_user %>
-                 <% if current_user.following?(@user) %>
-                   <%= link_to "フォロ-外す", relationship_path(id: @user.id), method: :delete, class: "btn btn-info" %>
-                 <% else %>
-                   <%= link_to "フォロ-する", relationships_path(follow_id: @user.id), method: :post, class: "btn btn-success" %>
+                 <% unless @user == current_user %>
+                     <% if current_user.following?(@user) %>
+                         <%= link_to "フォロ-外す", relationship_path(id: @user.id), method: :delete, class: "btn btn-info" %>
+                     <% else %>
+                         <%= link_to "フォロ-する", relationships_path(follow_id: @user.id), method: :post, class: "btn btn-success" %>
+                     <% end %>
                  <% end %>
-               <% end %>
              </div>
              <%= render 'books/form', book: @book_new %>
          </div>
@@ -38,22 +38,20 @@
                              <td><%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-sm btn-success"%></td>
                              <td><%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger"%></td>
                          <% end %>
-
                          <td>
-                           <div id= "favorite-btn_<%= @book.id %>">
-                             <%= render partial: 'favorites/favorite-btn', locals: { book: @book} %>
-                           </div>
+                             <div id= "favorite-btn_<%= @book.id %>">
+                                 <%= render partial: 'favorites/favorite-btn', locals: { book: @book} %>
+                             </div>
                          </td>
-
                          <td>コメント数：<%= @book.book_comments.count %></td>
                      </tr>
                  </tbody>
              </table>
              <div id="comments_area">
-               <%= render 'book_comments/index', book: @book %>
+                 <%= render 'book_comments/index', book: @book %>
              </div>
              <div>
-               <%= render 'book_comments/form', book: @book %>
+                 <%= render 'book_comments/form', book: @book %>
              </div>
          </div>
      </div>
